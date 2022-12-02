@@ -3,30 +3,27 @@ from bs4 import BeautifulSoup
 
 URL = 'https://en.wikipedia.org/wiki/Music'
 page = requests.get(URL)
-# print(page.content)
 
 soup = BeautifulSoup(page.content, 'html.parser')
-# print(soup)
 
-results = soup.find(class_='noprint Inline-Template Template-Fact')
-# print(results.prettify())
-
-citations_needed = results.find_all('i')
-# print(citations_needed)
-
-anchors = results('a')
-# print(anchors)
+citation = 'citation needed'
+results = soup.find_all(text=citation)
 
 
 def get_citations_needed_count():
-    print('Total citations needed: ', len(citations_needed))
-    return len(citations_needed)
+    print('citations needed: ', len(results))
+    print(' ')
+    return len(results)
 
 
 def get_citations_needed_report():
-    pass
+    for txt in results:
+        citation_parent = txt.find_parent('p')
+        txt_split = citation_parent.text.split()
+        print(' '.join(txt_split))
+        print(' ')
 
 
 if __name__ == '__main__':
     get_citations_needed_count()
-
+    get_citations_needed_report()

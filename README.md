@@ -30,4 +30,4 @@
 
 ## How to initialize/run your application
 
-* [python3 scraper.py](/Users/Alex/projects/code401/web-scraper/scraper.py)
+* python3 scraper.py
